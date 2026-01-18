@@ -85,9 +85,9 @@ export function OpportunitiesPage() {
           animate={{ opacity: 1, y: 0 }}
           className="text-center max-w-3xl mx-auto mb-16"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-amber-500/10 border border-amber-500/20 rounded-full mb-6">
-            <Sparkles className="w-4 h-4 text-amber-400" />
-            <span className="text-sm font-medium text-amber-300">Coming Soon</span>
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-[var(--color-offwhite-4)] border border-[var(--color-gray-200)] rounded-full mb-6">
+            <Sparkles className="w-4 h-4 text-[var(--color-red-500)]" />
+            <span className="text-sm font-medium text-[var(--color-red-400)]">Coming Soon</span>
           </div>
 
           <h1 className="text-display mb-6">
@@ -95,7 +95,7 @@ export function OpportunitiesPage() {
             <span className="gradient-text block">Awaits</span>
           </h1>
 
-          <p className="text-xl text-zinc-400 mb-8 leading-relaxed">
+          <p className="text-xl text-[var(--color-gray-400)] mb-8 leading-relaxed">
             Opportunity Board connects CodeXtreme builders with companies that value
             hackathon experience. Curated roles from startups and tech giants alike.
           </p>
@@ -158,8 +158,8 @@ export function OpportunitiesPage() {
                     />
 
                     <div className="flex-1 min-w-0">
-                      <h3 className="font-semibold text-white mb-1">{job.title}</h3>
-                      <div className="flex flex-wrap items-center gap-3 text-sm text-zinc-400">
+                      <h3 className="font-semibold text-[var(--color-black-900)] mb-1">{job.title}</h3>
+                      <div className="flex flex-wrap items-center gap-3 text-sm text-[var(--color-gray-400)]">
                         <span className="flex items-center gap-1">
                           <Building className="w-3.5 h-3.5" />
                           {job.company}
@@ -176,14 +176,14 @@ export function OpportunitiesPage() {
                     </div>
 
                     <div className="flex items-center gap-3">
-                      <span className="text-xs text-zinc-500">{job.postedAt}</span>
+                      <span className="text-xs text-[var(--color-gray-400)]">{job.postedAt}</span>
                       <Button variant="secondary" size="sm" rightIcon={<ExternalLink className="w-3.5 h-3.5" />}>
                         Apply
                       </Button>
                     </div>
                   </div>
 
-                  <div className="flex gap-2 mt-4 pt-4 border-t border-zinc-800">
+                  <div className="flex gap-2 mt-4 pt-4 border-t border-[var(--color-gray-100)]">
                     <Badge variant="default" size="sm">{job.type}</Badge>
                     {job.tags.map((tag) => (
                       <Badge key={tag} size="sm" variant="default">
@@ -223,11 +223,11 @@ export function OpportunitiesPage() {
               transition={{ delay: 0.5 + i * 0.1 }}
             >
               <Card className="h-full text-center">
-                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-amber-500/20 to-orange-500/20 flex items-center justify-center mx-auto mb-4">
-                  <feature.icon className="w-6 h-6 text-amber-400" />
+                <div className="w-12 h-12 rounded-xl bg-[var(--color-offwhite-4)] flex items-center justify-center mx-auto mb-4">
+                  <feature.icon className="w-6 h-6 text-[var(--color-red-500)]" />
                 </div>
-                <h3 className="font-semibold text-white mb-2">{feature.title}</h3>
-                <p className="text-sm text-zinc-400">{feature.description}</p>
+                <h3 className="font-semibold text-[var(--color-black-900)] mb-2">{feature.title}</h3>
+                <p className="text-sm text-[var(--color-gray-400)]">{feature.description}</p>
               </Card>
             </motion.div>
           ))}

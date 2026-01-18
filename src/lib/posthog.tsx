@@ -61,8 +61,6 @@ export const ANALYTICS_EVENTS = {
   // Required key actions
   AUTH_LOGIN_SUCCESS: 'auth_login_success',
   EVENT_REGISTER_COMPLETE: 'event_register_complete',
-  TEAM_CREATED: 'team_created',
-  SUBMISSION_SAVED: 'submission_saved',
   SUBMISSION_SUBMITTED: 'submission_submitted',
   ADMIN_EVENT_PUBLISHED: 'admin_event_published',
   JUDGE_SCORE_SUBMITTED: 'judge_score_submitted',

@@ -130,29 +130,29 @@ export function JudgingComparePage() {
         <div className="flex items-center gap-3 mb-4">
           <Avatar src={submission.team.avatarUrl} name={submission.team.name} size="lg" />
           <div>
-            <h3 className="font-semibold text-white">{submission.projectName}</h3>
-            <p className="text-sm text-zinc-500">{submission.team.name}</p>
+            <h3 className="font-semibold text-[var(--color-black-900)]">{submission.projectName}</h3>
+            <p className="text-sm text-[var(--color-gray-400)]">{submission.team.name}</p>
           </div>
         </div>
 
         {/* Tagline */}
-        <p className="text-zinc-300 mb-4">{submission.tagline}</p>
+        <p className="text-[var(--color-black-800)] mb-4">{submission.tagline}</p>
 
         {/* Problem & Solution */}
         <div className="space-y-4 mb-6">
           <div>
-            <h4 className="text-xs font-medium text-zinc-500 uppercase mb-1">Problem</h4>
-            <p className="text-sm text-zinc-400">{submission.problemStatement}</p>
+            <h4 className="text-xs font-medium text-[var(--color-gray-400)] uppercase mb-1">Problem</h4>
+            <p className="text-sm text-[var(--color-gray-500)]">{submission.problemStatement}</p>
           </div>
           <div>
-            <h4 className="text-xs font-medium text-zinc-500 uppercase mb-1">Solution</h4>
-            <p className="text-sm text-zinc-400">{submission.solution}</p>
+            <h4 className="text-xs font-medium text-[var(--color-gray-400)] uppercase mb-1">Solution</h4>
+            <p className="text-sm text-[var(--color-gray-500)]">{submission.solution}</p>
           </div>
         </div>
 
         {/* Tech Stack */}
         <div className="mb-4">
-          <h4 className="text-xs font-medium text-zinc-500 uppercase mb-2">Tech Stack</h4>
+          <h4 className="text-xs font-medium text-[var(--color-gray-400)] uppercase mb-2">Tech Stack</h4>
           <div className="flex flex-wrap gap-2">
             {submission.techStack.map((tech) => (
               <Badge key={tech} size="sm" variant="default">
@@ -163,13 +163,13 @@ export function JudgingComparePage() {
         </div>
 
         {/* Links */}
-        <div className="flex gap-2 pt-4 border-t border-zinc-800">
+        <div className="flex gap-2 pt-4 border-t border-[var(--color-gray-100)]">
           {submission.demoUrl && (
             <a
               href={submission.demoUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-1.5 px-3 py-1.5 bg-zinc-800 rounded-lg text-sm text-zinc-300 hover:bg-zinc-700 transition-colors"
+              className="flex items-center gap-1.5 px-3 py-1.5 bg-[var(--color-offwhite-4)] rounded-lg text-sm text-[var(--color-black-800)] hover:bg-[var(--color-offwhite-5)] transition-colors"
             >
               <ExternalLink className="w-3.5 h-3.5" />
               Demo
@@ -180,7 +180,7 @@ export function JudgingComparePage() {
               href={submission.videoUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-1.5 px-3 py-1.5 bg-zinc-800 rounded-lg text-sm text-zinc-300 hover:bg-zinc-700 transition-colors"
+              className="flex items-center gap-1.5 px-3 py-1.5 bg-[var(--color-offwhite-4)] rounded-lg text-sm text-[var(--color-black-800)] hover:bg-[var(--color-offwhite-5)] transition-colors"
             >
               <Video className="w-3.5 h-3.5" />
               Video
@@ -199,13 +199,13 @@ export function JudgingComparePage() {
           <Link
             to="/judging/$eventSlug"
             params={{ eventSlug }}
-            className="inline-flex items-center gap-2 text-zinc-400 hover:text-white transition-colors"
+            className="inline-flex items-center gap-2 text-[var(--color-gray-400)] hover:text-[var(--color-black-900)] transition-colors"
           >
             <ArrowLeft className="w-4 h-4" />
             Back to queue
           </Link>
 
-          <div className="flex items-center gap-2 text-sm text-zinc-400">
+          <div className="flex items-center gap-2 text-sm text-[var(--color-gray-400)]">
             <span>{comparisons.length} comparisons made</span>
           </div>
         </div>
@@ -216,8 +216,8 @@ export function JudgingComparePage() {
           animate={{ opacity: 1, y: 0 }}
           className="text-center mb-8"
         >
-          <h1 className="text-2xl font-bold text-white mb-2">Compare Mode</h1>
-          <p className="text-zinc-400">
+          <h1 className="text-2xl font-bold text-[var(--color-black-900)] mb-2">Compare Mode</h1>
+          <p className="text-[var(--color-gray-400)]">
             Swipe away the project you think is weaker, or click the buttons below
           </p>
         </motion.div>
@@ -226,15 +226,15 @@ export function JudgingComparePage() {
         <div className="grid md:grid-cols-2 gap-6 mb-8">
           <div className="relative">
             <SubmissionCard submission={leftSubmission} side="left" />
-            <div className="absolute -top-3 -left-3 w-8 h-8 bg-zinc-800 border border-zinc-700 rounded-full flex items-center justify-center">
-              <span className="text-sm font-medium text-zinc-400">A</span>
+            <div className="absolute -top-3 -left-3 w-8 h-8 bg-[var(--color-offwhite-4)] border border-[var(--color-gray-200)] rounded-full flex items-center justify-center">
+              <span className="text-sm font-medium text-[var(--color-gray-400)]">A</span>
             </div>
           </div>
 
           <div className="relative">
             <SubmissionCard submission={rightSubmission} side="right" />
-            <div className="absolute -top-3 -left-3 w-8 h-8 bg-zinc-800 border border-zinc-700 rounded-full flex items-center justify-center">
-              <span className="text-sm font-medium text-zinc-400">B</span>
+            <div className="absolute -top-3 -left-3 w-8 h-8 bg-[var(--color-offwhite-4)] border border-[var(--color-gray-200)] rounded-full flex items-center justify-center">
+              <span className="text-sm font-medium text-[var(--color-gray-400)]">B</span>
             </div>
           </div>
         </div>
@@ -277,10 +277,10 @@ export function JudgingComparePage() {
         </div>
 
         {/* Keyboard shortcuts hint */}
-        <p className="text-center text-xs text-zinc-600 mt-6">
-          Tip: Use keyboard shortcuts: <kbd className="px-1.5 py-0.5 bg-zinc-800 rounded">←</kbd> for A,{' '}
-          <kbd className="px-1.5 py-0.5 bg-zinc-800 rounded">→</kbd> for B,{' '}
-          <kbd className="px-1.5 py-0.5 bg-zinc-800 rounded">Space</kbd> to skip
+        <p className="text-center text-xs text-[var(--color-gray-400)] mt-6">
+          Tip: Use keyboard shortcuts: <kbd className="px-1.5 py-0.5 bg-[var(--color-offwhite-4)] rounded">←</kbd> for A,{' '}
+          <kbd className="px-1.5 py-0.5 bg-[var(--color-offwhite-4)] rounded">→</kbd> for B,{' '}
+          <kbd className="px-1.5 py-0.5 bg-[var(--color-offwhite-4)] rounded">Space</kbd> to skip
         </p>
       </Container>
     </div>

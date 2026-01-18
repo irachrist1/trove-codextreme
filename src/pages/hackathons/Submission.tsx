@@ -138,7 +138,7 @@ export function SubmissionPage() {
         <Link
           to="/hackathons/$slug/team"
           params={{ slug }}
-          className="inline-flex items-center gap-2 text-zinc-400 hover:text-white mb-8 transition-colors"
+          className="inline-flex items-center gap-2 text-[var(--color-gray-400)] hover:text-[var(--color-black-900)] mb-8 transition-colors"
         >
           <ArrowLeft className="w-4 h-4" />
           Back to team
@@ -147,8 +147,8 @@ export function SubmissionPage() {
         {/* Header */}
         <div className="flex items-center justify-between mb-8">
           <div>
-            <h1 className="text-2xl font-bold text-white mb-1">Project Submission</h1>
-            <p className="text-zinc-400">Tell us about what you built</p>
+            <h1 className="text-2xl font-bold text-[var(--color-black-900)] mb-1">Project Submission</h1>
+            <p className="text-[var(--color-gray-400)]">Tell us about what you built</p>
           </div>
           <Badge
             variant={submission.status === 'submitted' ? 'success' : 'warning'}
@@ -245,15 +245,15 @@ export function SubmissionPage() {
                 {submission.keyFeatures.map((feature, i) => (
                   <div
                     key={i}
-                    className="flex items-center gap-3 p-3 bg-zinc-800/50 rounded-lg"
+                    className="flex items-center gap-3 p-3 bg-[var(--color-offwhite-3)] rounded-lg"
                   >
-                    <Check className="w-4 h-4 text-emerald-400 flex-shrink-0" />
-                    <span className="text-sm text-zinc-300 flex-1">{feature}</span>
+                    <Check className="w-4 h-4 text-[var(--color-success-500)] flex-shrink-0" />
+                    <span className="text-sm text-[var(--color-black-800)] flex-1">{feature}</span>
                     <button
                       onClick={() => removeFeature(i)}
-                      className="p-1 hover:bg-zinc-700 rounded"
+                      className="p-1 hover:bg-[var(--color-offwhite-5)] rounded"
                     >
-                      <X className="w-4 h-4 text-zinc-500" />
+                      <X className="w-4 h-4 text-[var(--color-gray-400)]" />
                     </button>
                   </div>
                 ))}
@@ -316,7 +316,7 @@ export function SubmissionPage() {
           <div className="space-y-6">
             {/* Completion Status */}
             <Card>
-              <h3 className="font-medium text-white mb-4">Completion Status</h3>
+              <h3 className="font-medium text-[var(--color-black-900)] mb-4">Completion Status</h3>
 
               <div className="space-y-3">
                 {[
@@ -330,12 +330,12 @@ export function SubmissionPage() {
                   <div key={item.label} className="flex items-center gap-2">
                     <div
                       className={`w-5 h-5 rounded-full flex items-center justify-center ${
-                        item.done ? 'bg-emerald-500/20' : 'bg-zinc-800'
+                        item.done ? 'bg-[var(--color-success-100)]' : 'bg-[var(--color-offwhite-4)]'
                       }`}
                     >
-                      {item.done && <Check className="w-3 h-3 text-emerald-400" />}
+                      {item.done && <Check className="w-3 h-3 text-[var(--color-success-500)]" />}
                     </div>
-                    <span className={`text-sm ${item.done ? 'text-zinc-300' : 'text-zinc-500'}`}>
+                    <span className={`text-sm ${item.done ? 'text-[var(--color-black-800)]' : 'text-[var(--color-gray-400)]'}`}>
                       {item.label}
                     </span>
                   </div>
@@ -343,9 +343,9 @@ export function SubmissionPage() {
               </div>
 
               {!isComplete && (
-                <div className="mt-4 p-3 bg-amber-500/10 border border-amber-500/20 rounded-lg flex items-start gap-2">
-                  <AlertCircle className="w-4 h-4 text-amber-400 flex-shrink-0 mt-0.5" />
-                  <p className="text-xs text-amber-200">
+                <div className="mt-4 p-3 bg-[var(--color-warning-100)] border border-[var(--color-warning-200)] rounded-lg flex items-start gap-2">
+                  <AlertCircle className="w-4 h-4 text-[var(--color-warning-500)] flex-shrink-0 mt-0.5" />
+                  <p className="text-xs text-[var(--color-warning-500)]">
                     Complete all required fields before submitting
                   </p>
                 </div>
@@ -375,7 +375,7 @@ export function SubmissionPage() {
                 </Button>
               </div>
 
-              <p className="text-xs text-zinc-500 mt-4 text-center">
+              <p className="text-xs text-[var(--color-gray-400)] mt-4 text-center">
                 You can edit your submission until the deadline
               </p>
             </Card>

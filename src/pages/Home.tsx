@@ -14,8 +14,8 @@ export function HomePage() {
       {/* Hero Section */}
       <section className="relative overflow-hidden py-20 md:py-32">
         {/* Background gradient */}
-        <div className="absolute inset-0 bg-gradient-to-b from-indigo-500/10 via-transparent to-transparent" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-to-r from-indigo-500/20 to-pink-500/20 rounded-full blur-3xl opacity-30" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[var(--color-offwhite-4)] via-transparent to-transparent" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-to-r from-[var(--color-gray-100)] to-[var(--color-offwhite-5)] rounded-full blur-3xl opacity-30" />
 
         <Container className="relative">
           <motion.div
@@ -24,12 +24,12 @@ export function HomePage() {
             transition={{ duration: 0.5 }}
             className="text-center max-w-4xl mx-auto"
           >
-            <span className="text-overline text-indigo-400 mb-4 block">CodeXtreme</span>
+            <span className="text-overline text-[var(--color-red-500)] mb-4 block">CodeXtreme</span>
             <h1 className="text-display mb-6">
               Where Builders
               <span className="gradient-text block">Shape the Future</span>
             </h1>
-            <p className="text-xl text-zinc-400 mb-8 max-w-2xl mx-auto leading-relaxed">
+            <p className="text-xl text-[var(--color-gray-400)] mb-8 max-w-2xl mx-auto leading-relaxed">
               Join the most ambitious builders from around the world. Compete in hackathons,
               learn through challenges, and connect with a community that ships.
             </p>
@@ -60,9 +60,9 @@ export function HomePage() {
               { label: 'Prize Pool', value: '$500K+' },
               { label: 'Countries', value: '45+' },
             ].map((stat, i) => (
-              <div key={i} className="text-center p-6 bg-zinc-900/50 rounded-2xl border border-zinc-800">
-                <p className="text-3xl md:text-4xl font-bold text-white mb-1">{stat.value}</p>
-                <p className="text-sm text-zinc-500">{stat.label}</p>
+              <div key={i} className="text-center p-6 bg-[var(--color-white)] rounded-2xl border border-[var(--color-gray-100)] shadow-sm">
+                <p className="text-3xl md:text-4xl font-bold text-[var(--color-black-900)] mb-1">{stat.value}</p>
+                <p className="text-sm text-[var(--color-gray-400)]">{stat.label}</p>
               </div>
             ))}
           </motion.div>
@@ -70,7 +70,7 @@ export function HomePage() {
       </section>
 
       {/* Features Section */}
-      <section className="py-20 border-t border-zinc-800">
+      <section className="py-20 border-t border-[var(--color-gray-100)]">
         <Container>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -79,7 +79,7 @@ export function HomePage() {
             className="text-center mb-16"
           >
             <h2 className="text-headline mb-4">Everything You Need to Build</h2>
-            <p className="text-zinc-400 max-w-xl mx-auto">
+            <p className="text-[var(--color-gray-400)] max-w-xl mx-auto">
               A complete ecosystem for hackers, builders, and dreamers.
             </p>
           </motion.div>
@@ -124,16 +124,16 @@ export function HomePage() {
               >
                 <Link to={feature.href}>
                   <Card variant="interactive" className="h-full group">
-                    <div className="p-2 w-12 h-12 rounded-xl bg-gradient-to-br from-indigo-500/20 to-pink-500/20 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                      <feature.icon className="w-6 h-6 text-indigo-400" />
+                    <div className="p-2 w-12 h-12 rounded-xl bg-[var(--color-offwhite-4)] flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                      <feature.icon className="w-6 h-6 text-[var(--color-red-500)]" />
                     </div>
                     <h3 className="text-title mb-2 flex items-center gap-2">
                       {feature.title}
                       {!feature.active && (
-                        <span className="text-[10px] px-1.5 py-0.5 bg-zinc-700 rounded text-zinc-400">Soon</span>
+                        <span className="text-[10px] px-1.5 py-0.5 bg-[var(--color-gray-100)] rounded text-[var(--color-gray-400)]">Soon</span>
                       )}
                     </h3>
-                    <p className="text-sm text-zinc-400">{feature.description}</p>
+                    <p className="text-sm text-[var(--color-gray-400)]">{feature.description}</p>
                   </Card>
                 </Link>
               </motion.div>
@@ -143,11 +143,11 @@ export function HomePage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 border-t border-zinc-800">
+      <section className="py-20 border-t border-[var(--color-gray-100)]">
         <Container size="md">
           <Card variant="gradient" className="text-center py-12">
             <h2 className="text-headline mb-4">Ready to Start Building?</h2>
-            <p className="text-zinc-400 mb-8 max-w-md mx-auto">
+            <p className="text-[var(--color-gray-400)] mb-8 max-w-md mx-auto">
               Join thousands of builders who are turning their ideas into reality.
             </p>
             <Link to="/hackathons">
@@ -160,16 +160,14 @@ export function HomePage() {
       </section>
 
       {/* Footer */}
-      <footer className="py-12 border-t border-zinc-800">
+      <footer className="py-12 border-t border-[var(--color-gray-100)]">
         <Container>
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             <div className="flex items-center gap-2">
-              <div className="w-8 h-8 bg-gradient-to-br from-indigo-500 to-pink-500 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-sm">T</span>
-              </div>
-              <span className="font-semibold text-white">Trove by CodeXtreme</span>
+              <img src="/logo.png" alt="Trove" className="h-8 w-auto" />
+              <span className="font-semibold text-[var(--color-black-900)]">Trove by CodeXtreme</span>
             </div>
-            <p className="text-sm text-zinc-500">
+            <p className="text-sm text-[var(--color-gray-400)]">
               Building the future of hackathons.
             </p>
           </div>

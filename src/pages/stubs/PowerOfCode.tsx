@@ -51,9 +51,9 @@ const mockChallenges = [
 ]
 
 const difficultyColors = {
-  Beginner: 'text-emerald-400',
-  Intermediate: 'text-amber-400',
-  Advanced: 'text-red-400',
+  Beginner: 'text-[var(--color-success-500)]',
+  Intermediate: 'text-[var(--color-warning-500)]',
+  Advanced: 'text-[var(--color-red-500)]',
 }
 
 export function PowerOfCodePage() {
@@ -85,9 +85,9 @@ export function PowerOfCodePage() {
           animate={{ opacity: 1, y: 0 }}
           className="text-center max-w-3xl mx-auto mb-16"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-emerald-500/10 border border-emerald-500/20 rounded-full mb-6">
-            <Sparkles className="w-4 h-4 text-emerald-400" />
-            <span className="text-sm font-medium text-emerald-300">Coming Soon</span>
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-[var(--color-offwhite-4)] border border-[var(--color-gray-200)] rounded-full mb-6">
+            <Sparkles className="w-4 h-4 text-[var(--color-red-500)]" />
+            <span className="text-sm font-medium text-[var(--color-red-400)]">Coming Soon</span>
           </div>
 
           <h1 className="text-display mb-6">
@@ -95,7 +95,7 @@ export function PowerOfCodePage() {
             <span className="gradient-text block">Coding Skills</span>
           </h1>
 
-          <p className="text-xl text-zinc-400 mb-8 leading-relaxed">
+          <p className="text-xl text-[var(--color-gray-400)] mb-8 leading-relaxed">
             Power of Code is challenge-based learning that actually works.
             Real-world projects, instant feedback, and a path from beginner to expert.
           </p>
@@ -129,9 +129,9 @@ export function PowerOfCodePage() {
             { icon: Trophy, value: '25', label: 'Achievements' },
           ].map((stat, i) => (
             <Card key={i} className="text-center">
-              <stat.icon className="w-6 h-6 text-emerald-400 mx-auto mb-2" />
-              <p className="text-2xl font-bold text-white">{stat.value}</p>
-              <p className="text-sm text-zinc-500">{stat.label}</p>
+              <stat.icon className="w-6 h-6 text-[var(--color-red-500)] mx-auto mb-2" />
+              <p className="text-2xl font-bold text-[var(--color-black-900)]">{stat.value}</p>
+              <p className="text-sm text-[var(--color-gray-400)]">{stat.label}</p>
             </Card>
           ))}
         </motion.div>
@@ -143,7 +143,7 @@ export function PowerOfCodePage() {
           transition={{ delay: 0.3 }}
           className="max-w-2xl mx-auto"
         >
-          <h2 className="text-xl font-bold text-white text-center mb-6">Sample Challenges</h2>
+          <h2 className="text-xl font-bold text-[var(--color-black-900)] text-center mb-6">Sample Challenges</h2>
 
           <div className="space-y-4">
             {mockChallenges.map((challenge, i) => (
@@ -158,21 +158,21 @@ export function PowerOfCodePage() {
                   className={challenge.locked ? 'opacity-60' : ''}
                 >
                   <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 rounded-xl bg-zinc-800 flex items-center justify-center flex-shrink-0">
+                    <div className="w-12 h-12 rounded-xl bg-[var(--color-offwhite-4)] flex items-center justify-center flex-shrink-0">
                       {challenge.locked ? (
-                        <Lock className="w-5 h-5 text-zinc-500" />
+                        <Lock className="w-5 h-5 text-[var(--color-gray-400)]" />
                       ) : (
-                        <Code2 className="w-5 h-5 text-emerald-400" />
+                        <Code2 className="w-5 h-5 text-[var(--color-red-500)]" />
                       )}
                     </div>
 
                     <div className="flex-1 min-w-0">
-                      <h3 className="font-medium text-white truncate">{challenge.title}</h3>
+                      <h3 className="font-medium text-[var(--color-black-900)] truncate">{challenge.title}</h3>
                       <div className="flex items-center gap-3 text-sm">
                         <span className={difficultyColors[challenge.difficulty as keyof typeof difficultyColors]}>
                           {challenge.difficulty}
                         </span>
-                        <span className="text-zinc-500">{challenge.completions.toLocaleString()} completions</span>
+                        <span className="text-[var(--color-gray-400)]">{challenge.completions.toLocaleString()} completions</span>
                       </div>
                     </div>
 
@@ -184,7 +184,7 @@ export function PowerOfCodePage() {
                     </div>
                   </div>
 
-                  <div className="flex gap-2 mt-3 pt-3 border-t border-zinc-800">
+                  <div className="flex gap-2 mt-3 pt-3 border-t border-[var(--color-gray-100)]">
                     {challenge.tags.map((tag) => (
                       <Badge key={tag} size="sm" variant="default">
                         {tag}
@@ -223,11 +223,11 @@ export function PowerOfCodePage() {
               transition={{ delay: 0.5 + i * 0.1 }}
             >
               <Card className="h-full text-center">
-                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-emerald-500/20 to-cyan-500/20 flex items-center justify-center mx-auto mb-4">
-                  <feature.icon className="w-6 h-6 text-emerald-400" />
+                <div className="w-12 h-12 rounded-xl bg-[var(--color-offwhite-4)] flex items-center justify-center mx-auto mb-4">
+                  <feature.icon className="w-6 h-6 text-[var(--color-red-500)]" />
                 </div>
-                <h3 className="font-semibold text-white mb-2">{feature.title}</h3>
-                <p className="text-sm text-zinc-400">{feature.description}</p>
+                <h3 className="font-semibold text-[var(--color-black-900)] mb-2">{feature.title}</h3>
+                <p className="text-sm text-[var(--color-gray-400)]">{feature.description}</p>
               </Card>
             </motion.div>
           ))}

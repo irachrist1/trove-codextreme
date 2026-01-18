@@ -195,7 +195,7 @@ export function LeaderboardPage() {
 
             {/* Rest of the leaderboard */}
             <Card padding="none">
-              <div className="divide-y divide-zinc-800">
+              <div className="divide-y divide-[var(--color-gray-100)]">
                 {rest.map((entry, i) => (
                   <motion.div
                     key={entry.rank}
@@ -210,7 +210,7 @@ export function LeaderboardPage() {
             </Card>
 
             {/* Last updated */}
-            <p className="text-center text-xs text-zinc-500 mt-6">
+            <p className="text-center text-xs text-[var(--color-gray-400)] mt-6">
               Last updated: {new Date().toLocaleTimeString()}
             </p>
           </>
@@ -231,9 +231,9 @@ function PodiumCard({
   isWinner?: boolean
 }) {
   const placeIcons = {
-    1: <Trophy className="w-8 h-8 text-amber-400" />,
-    2: <Medal className="w-7 h-7 text-zinc-300" />,
-    3: <Medal className="w-6 h-6 text-amber-600" />,
+    1: <Trophy className="w-8 h-8 text-[var(--color-warning-500)]" />,
+    2: <Medal className="w-7 h-7 text-[var(--color-gray-300)]" />,
+    3: <Medal className="w-6 h-6 text-[var(--color-warning-400)]" />,
   }
 
   return (
@@ -242,7 +242,7 @@ function PodiumCard({
       className={`text-center relative overflow-hidden ${isWinner ? 'pulse-glow' : ''}`}
     >
       {isWinner && (
-        <div className="absolute inset-0 bg-gradient-to-b from-amber-500/10 to-transparent pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[var(--color-warning-100)] to-transparent pointer-events-none" />
       )}
 
       <div className="relative">
@@ -257,8 +257,8 @@ function PodiumCard({
           className="mx-auto mb-4"
         />
 
-        <h3 className="font-bold text-white text-lg mb-1">{entry.teamName}</h3>
-        <p className="text-sm text-zinc-400 mb-3">{entry.projectName}</p>
+        <h3 className="font-bold text-[var(--color-black-900)] text-lg mb-1">{entry.teamName}</h3>
+        <p className="text-sm text-[var(--color-gray-400)] mb-3">{entry.projectName}</p>
 
         <Badge
           size="sm"
@@ -270,9 +270,9 @@ function PodiumCard({
           {entry.trackId}
         </Badge>
 
-        <div className="mt-4 pt-4 border-t border-zinc-800">
-          <span className="text-2xl font-bold text-white">{entry.score.toFixed(1)}</span>
-          <span className="text-zinc-500 text-sm"> / 55</span>
+        <div className="mt-4 pt-4 border-t border-[var(--color-gray-100)]">
+          <span className="text-2xl font-bold text-[var(--color-black-900)]">{entry.score.toFixed(1)}</span>
+          <span className="text-[var(--color-gray-400)] text-sm"> / 55</span>
         </div>
       </div>
     </Card>
@@ -282,18 +282,18 @@ function PodiumCard({
 // Row for ranks 4+
 function LeaderboardRow({ entry }: { entry: typeof mockLeaderboard[0] }) {
   return (
-    <div className="flex items-center gap-4 p-4 hover:bg-zinc-800/30 transition-colors">
+    <div className="flex items-center gap-4 p-4 hover:bg-[var(--color-offwhite-3)] transition-colors">
       {/* Rank */}
-      <div className="w-10 h-10 rounded-lg bg-zinc-800 flex items-center justify-center flex-shrink-0">
-        <span className="font-bold text-zinc-400">#{entry.rank}</span>
+      <div className="w-10 h-10 rounded-lg bg-[var(--color-offwhite-4)] flex items-center justify-center flex-shrink-0">
+        <span className="font-bold text-[var(--color-gray-400)]">#{entry.rank}</span>
       </div>
 
       {/* Team */}
       <Avatar src={entry.avatarUrl} name={entry.teamName} size="md" />
 
       <div className="flex-1 min-w-0">
-        <h4 className="font-medium text-white truncate">{entry.teamName}</h4>
-        <p className="text-sm text-zinc-500 truncate">{entry.projectName}</p>
+        <h4 className="font-medium text-[var(--color-black-900)] truncate">{entry.teamName}</h4>
+        <p className="text-sm text-[var(--color-gray-400)] truncate">{entry.projectName}</p>
       </div>
 
       {/* Track */}
@@ -311,24 +311,24 @@ function LeaderboardRow({ entry }: { entry: typeof mockLeaderboard[0] }) {
       {/* Change indicator */}
       <div className="w-12 flex justify-center">
         {entry.change > 0 ? (
-          <span className="flex items-center text-emerald-400 text-sm">
+          <span className="flex items-center text-[var(--color-success-500)] text-sm">
             <ChevronUp className="w-4 h-4" />
             {entry.change}
           </span>
         ) : entry.change < 0 ? (
-          <span className="flex items-center text-red-400 text-sm">
+          <span className="flex items-center text-[var(--color-red-500)] text-sm">
             <ChevronDown className="w-4 h-4" />
             {Math.abs(entry.change)}
           </span>
         ) : (
-          <span className="text-zinc-600 text-sm">—</span>
+          <span className="text-[var(--color-gray-300)] text-sm">—</span>
         )}
       </div>
 
       {/* Score */}
       <div className="text-right w-20">
-        <span className="font-semibold text-white">{entry.score.toFixed(1)}</span>
-        <span className="text-zinc-500 text-xs"> pts</span>
+        <span className="font-semibold text-[var(--color-black-900)]">{entry.score.toFixed(1)}</span>
+        <span className="text-[var(--color-gray-400)] text-xs"> pts</span>
       </div>
     </div>
   )

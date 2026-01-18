@@ -29,6 +29,16 @@ type AnyApi = {
  * ```
  */
 export const api: AnyApi = {
+  auth: {
+    register: "auth:register" as unknown as FunctionReference<any, any, any, any>,
+    login: "auth:login" as unknown as FunctionReference<any, any, any, any>,
+    logout: "auth:logout" as unknown as FunctionReference<any, any, any, any>,
+    getCurrentUser: "auth:getCurrentUser" as unknown as FunctionReference<any, any, any, any>,
+    requestMagicLink: "auth:requestMagicLink" as unknown as FunctionReference<any, any, any, any>,
+    verifyCode: "auth:verifyCode" as unknown as FunctionReference<any, any, any, any>,
+    requestPasswordReset: "auth:requestPasswordReset" as unknown as FunctionReference<any, any, any, any>,
+    resetPassword: "auth:resetPassword" as unknown as FunctionReference<any, any, any, any>,
+  },
   events: {
     listPublished: "events:listPublished" as unknown as FunctionReference<any, any, any, any>,
     listUpcoming: "events:listUpcoming" as unknown as FunctionReference<any, any, any, any>,

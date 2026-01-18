@@ -67,9 +67,9 @@ export function BuildathonPage() {
           animate={{ opacity: 1, y: 0 }}
           className="text-center max-w-3xl mx-auto mb-16"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-purple-500/10 border border-purple-500/20 rounded-full mb-6">
-            <Sparkles className="w-4 h-4 text-purple-400" />
-            <span className="text-sm font-medium text-purple-300">Coming Soon</span>
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-[var(--color-offwhite-4)] border border-[var(--color-gray-200)] rounded-full mb-6">
+            <Sparkles className="w-4 h-4 text-[var(--color-red-500)]" />
+            <span className="text-sm font-medium text-[var(--color-red-400)]">Coming Soon</span>
           </div>
 
           <h1 className="text-display mb-6">
@@ -77,7 +77,7 @@ export function BuildathonPage() {
             <span className="gradient-text block">That Lasts</span>
           </h1>
 
-          <p className="text-xl text-zinc-400 mb-8 leading-relaxed">
+          <p className="text-xl text-[var(--color-gray-400)] mb-8 leading-relaxed">
             Buildathon is for the long game. Multi-week challenges with structured milestones,
             mentor check-ins, and the accountability you need to ship a real product.
           </p>
@@ -105,17 +105,17 @@ export function BuildathonPage() {
           className="max-w-4xl mx-auto mb-16"
         >
           <Card variant="gradient" className="relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-purple-500/20 to-pink-500/20 blur-3xl" />
+            <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-[var(--color-offwhite-5)] to-[var(--color-gray-100)] blur-3xl" />
 
             <div className="relative">
               {/* Header */}
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
                 <div>
                   <Badge variant="default" className="mb-2">Preview</Badge>
-                  <h2 className="text-2xl font-bold text-white">{mockBuildathon.title}</h2>
-                  <p className="text-zinc-400">{mockBuildathon.description}</p>
+                  <h2 className="text-2xl font-bold text-[var(--color-black-900)]">{mockBuildathon.title}</h2>
+                  <p className="text-[var(--color-gray-400)]">{mockBuildathon.description}</p>
                 </div>
-                <div className="flex items-center gap-4 text-sm text-zinc-400">
+                <div className="flex items-center gap-4 text-sm text-[var(--color-gray-400)]">
                   <span className="flex items-center gap-1.5">
                     <Calendar className="w-4 h-4" />
                     {mockBuildathon.duration}
@@ -129,7 +129,7 @@ export function BuildathonPage() {
 
               {/* Milestones Timeline */}
               <div className="relative mb-8">
-                <div className="absolute left-4 top-0 bottom-0 w-0.5 bg-zinc-800" />
+                <div className="absolute left-4 top-0 bottom-0 w-0.5 bg-[var(--color-gray-100)]" />
 
                 <div className="space-y-4">
                   {mockBuildathon.milestones.map((milestone, i) => (
@@ -143,28 +143,28 @@ export function BuildathonPage() {
                       <div
                         className={`w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 ${
                           milestone.status === 'completed'
-                            ? 'bg-emerald-500'
+                            ? 'bg-[var(--color-success-500)]'
                             : milestone.status === 'current'
-                            ? 'bg-purple-500 pulse-glow'
-                            : 'bg-zinc-700'
+                            ? 'bg-[var(--color-red-500)] pulse-glow'
+                            : 'bg-[var(--color-gray-200)]'
                         }`}
                       >
                         {milestone.status === 'completed' && (
-                          <CheckCircle2 className="w-3 h-3 text-white" />
+                          <CheckCircle2 className="w-3 h-3 text-[var(--color-white)]" />
                         )}
                         {milestone.status === 'current' && (
-                          <Clock className="w-3 h-3 text-white" />
+                          <Clock className="w-3 h-3 text-[var(--color-white)]" />
                         )}
                       </div>
                       <div className="flex-1 flex items-center justify-between py-2">
                         <span
                           className={`font-medium ${
-                            milestone.status === 'upcoming' ? 'text-zinc-500' : 'text-white'
+                            milestone.status === 'upcoming' ? 'text-[var(--color-gray-400)]' : 'text-[var(--color-black-900)]'
                           }`}
                         >
                           {milestone.title}
                         </span>
-                        <span className="text-xs text-zinc-500">Week {milestone.week}</span>
+                        <span className="text-xs text-[var(--color-gray-400)]">Week {milestone.week}</span>
                       </div>
                     </motion.div>
                   ))}
@@ -210,11 +210,11 @@ export function BuildathonPage() {
               transition={{ delay: 0.4 + i * 0.1 }}
             >
               <Card className="h-full text-center">
-                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-500/20 to-pink-500/20 flex items-center justify-center mx-auto mb-4">
-                  <feature.icon className="w-6 h-6 text-purple-400" />
+                <div className="w-12 h-12 rounded-xl bg-[var(--color-offwhite-4)] flex items-center justify-center mx-auto mb-4">
+                  <feature.icon className="w-6 h-6 text-[var(--color-red-500)]" />
                 </div>
-                <h3 className="font-semibold text-white mb-2">{feature.title}</h3>
-                <p className="text-sm text-zinc-400">{feature.description}</p>
+                <h3 className="font-semibold text-[var(--color-black-900)] mb-2">{feature.title}</h3>
+                <p className="text-sm text-[var(--color-gray-400)]">{feature.description}</p>
               </Card>
             </motion.div>
           ))}

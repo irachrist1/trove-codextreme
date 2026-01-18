@@ -46,9 +46,7 @@ export function AppShell({ children }: AppShellProps) {
         <div className="flex items-center gap-8">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-[var(--color-black-900)] rounded-lg flex items-center justify-center">
-              <span className="text-[var(--color-white)] font-bold text-sm">T</span>
-            </div>
+            <img src="/logo.png" alt="Trove" className="h-8 w-auto" />
             <span className="font-semibold text-[var(--color-black-900)]">Trove</span>
           </Link>
 
@@ -132,9 +130,7 @@ export function AppShell({ children }: AppShellProps) {
       {/* Mobile Header */}
       <header className="md:hidden flex items-center justify-between px-4 py-3 border-b border-[var(--color-gray-100)] bg-[var(--color-offwhite-1)] sticky top-0 z-40">
         <Link to="/" className="flex items-center gap-2">
-          <div className="w-8 h-8 bg-[var(--color-black-900)] rounded-lg flex items-center justify-center">
-            <span className="text-[var(--color-white)] font-bold text-sm">T</span>
-          </div>
+          <img src="/logo.png" alt="Trove" className="h-8 w-auto" />
           <span className="font-semibold text-[var(--color-black-900)]">Trove</span>
         </Link>
 

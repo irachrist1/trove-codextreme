@@ -68,9 +68,9 @@ export function TownsquarePage() {
           animate={{ opacity: 1, y: 0 }}
           className="text-center max-w-3xl mx-auto mb-16"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-indigo-500/10 border border-indigo-500/20 rounded-full mb-6">
-            <Sparkles className="w-4 h-4 text-indigo-400" />
-            <span className="text-sm font-medium text-indigo-300">Coming Soon</span>
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-[var(--color-offwhite-4)] border border-[var(--color-gray-200)] rounded-full mb-6">
+            <Sparkles className="w-4 h-4 text-[var(--color-red-500)]" />
+            <span className="text-sm font-medium text-[var(--color-red-400)]">Coming Soon</span>
           </div>
 
           <h1 className="text-display mb-6">
@@ -78,7 +78,7 @@ export function TownsquarePage() {
             <span className="gradient-text block">Connect & Create</span>
           </h1>
 
-          <p className="text-xl text-zinc-400 mb-8 leading-relaxed">
+          <p className="text-xl text-[var(--color-gray-400)] mb-8 leading-relaxed">
             Townsquare is the global community hub for CodeXtreme builders.
             Share your work, find collaborators, get feedback, and stay connected
             with the most ambitious builders in tech.
@@ -98,7 +98,7 @@ export function TownsquarePage() {
             </Button>
           </div>
 
-          <p className="text-xs text-zinc-500 mt-3">
+          <p className="text-xs text-[var(--color-gray-400)] mt-3">
             Join 2,400+ builders waiting for early access
           </p>
         </motion.div>
@@ -129,11 +129,11 @@ export function TownsquarePage() {
               transition={{ delay: i * 0.1 }}
             >
               <Card className="h-full text-center">
-                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-indigo-500/20 to-pink-500/20 flex items-center justify-center mx-auto mb-4">
-                  <feature.icon className="w-6 h-6 text-indigo-400" />
+                <div className="w-12 h-12 rounded-xl bg-[var(--color-offwhite-4)] flex items-center justify-center mx-auto mb-4">
+                  <feature.icon className="w-6 h-6 text-[var(--color-red-500)]" />
                 </div>
-                <h3 className="font-semibold text-white mb-2">{feature.title}</h3>
-                <p className="text-sm text-zinc-400">{feature.description}</p>
+                <h3 className="font-semibold text-[var(--color-black-900)] mb-2">{feature.title}</h3>
+                <p className="text-sm text-[var(--color-gray-400)]">{feature.description}</p>
               </Card>
             </motion.div>
           ))}
@@ -146,11 +146,11 @@ export function TownsquarePage() {
           transition={{ delay: 0.3 }}
           className="relative"
         >
-          <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/80 to-transparent z-10 flex items-center justify-center">
+          <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-bg-primary)] via-[var(--color-bg-primary)]/80 to-transparent z-10 flex items-center justify-center">
             <div className="text-center">
-              <Bell className="w-8 h-8 text-indigo-400 mx-auto mb-4" />
-              <h3 className="text-lg font-semibold text-white mb-2">Get notified at launch</h3>
-              <p className="text-sm text-zinc-400 mb-4">Be the first to explore the community</p>
+              <Bell className="w-8 h-8 text-[var(--color-red-500)] mx-auto mb-4" />
+              <h3 className="text-lg font-semibold text-[var(--color-black-900)] mb-2">Get notified at launch</h3>
+              <p className="text-sm text-[var(--color-gray-400)] mb-4">Be the first to explore the community</p>
             </div>
           </div>
 
@@ -161,21 +161,21 @@ export function TownsquarePage() {
                   <Avatar src={post.author.avatar} name={post.author.name} size="md" />
                   <div className="flex-1">
                     <div className="flex items-center gap-2 mb-1">
-                      <span className="font-medium text-white">{post.author.name}</span>
+                      <span className="font-medium text-[var(--color-black-900)]">{post.author.name}</span>
                       <Badge size="sm" variant="default">{post.author.role}</Badge>
-                      <span className="text-xs text-zinc-500">{post.timeAgo}</span>
+                      <span className="text-xs text-[var(--color-gray-400)]">{post.timeAgo}</span>
                     </div>
-                    <p className="text-zinc-300 mb-4">{post.content}</p>
-                    <div className="flex items-center gap-6 text-zinc-500">
-                      <button className="flex items-center gap-1.5 hover:text-pink-400 transition-colors">
+                    <p className="text-[var(--color-black-800)] mb-4">{post.content}</p>
+                    <div className="flex items-center gap-6 text-[var(--color-gray-400)]">
+                      <button className="flex items-center gap-1.5 hover:text-[var(--color-red-400)] transition-colors">
                         <Heart className="w-4 h-4" />
                         <span className="text-sm">{post.likes}</span>
                       </button>
-                      <button className="flex items-center gap-1.5 hover:text-indigo-400 transition-colors">
+                      <button className="flex items-center gap-1.5 hover:text-[var(--color-info-500)] transition-colors">
                         <MessageCircle className="w-4 h-4" />
                         <span className="text-sm">{post.comments}</span>
                       </button>
-                      <button className="flex items-center gap-1.5 hover:text-emerald-400 transition-colors">
+                      <button className="flex items-center gap-1.5 hover:text-[var(--color-success-500)] transition-colors">
                         <Share2 className="w-4 h-4" />
                       </button>
                       <button className="flex items-center gap-1.5 hover:text-amber-400 transition-colors ml-auto">

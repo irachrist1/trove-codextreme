@@ -105,26 +105,26 @@ export function JudgingPage() {
       <Container>
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-2xl font-bold text-white mb-2">Judging Dashboard</h1>
-          <p className="text-zinc-400">AI for Good Hackathon 2026</p>
+          <h1 className="text-2xl font-bold text-[var(--color-black-900)] mb-2">Judging Dashboard</h1>
+          <p className="text-[var(--color-gray-400)]">AI for Good Hackathon 2026</p>
         </div>
 
         {/* Progress */}
         <Card className="mb-8">
           <div className="flex items-center justify-between mb-4">
             <div>
-              <h3 className="text-lg font-semibold text-white">Your Progress</h3>
-              <p className="text-sm text-zinc-400">
+              <h3 className="text-lg font-semibold text-[var(--color-black-900)]">Your Progress</h3>
+              <p className="text-sm text-[var(--color-gray-400)]">
                 {assignments.completedCount} of {assignments.totalCount} submissions judged
               </p>
             </div>
             <div className="text-right">
-              <span className="text-2xl font-bold text-white">{Math.round(progress)}%</span>
+              <span className="text-2xl font-bold text-[var(--color-black-900)]">{Math.round(progress)}%</span>
             </div>
           </div>
-          <div className="h-2 bg-zinc-800 rounded-full overflow-hidden">
+          <div className="h-2 bg-[var(--color-offwhite-4)] rounded-full overflow-hidden">
             <motion.div
-              className="h-full bg-gradient-to-r from-indigo-500 to-pink-500"
+              className="h-full bg-[var(--color-black-900)]"
               initial={{ width: 0 }}
               animate={{ width: `${progress}%` }}
               transition={{ duration: 0.5, ease: 'easeOut' }}
@@ -175,21 +175,21 @@ export function JudgingPage() {
                       size="md"
                     />
                     <div>
-                      <h3 className="font-semibold text-white">{submission.projectName}</h3>
-                      <p className="text-sm text-zinc-500">{submission.team.name}</p>
+                      <h3 className="font-semibold text-[var(--color-black-900)]">{submission.projectName}</h3>
+                      <p className="text-sm text-[var(--color-gray-400)]">{submission.team.name}</p>
                     </div>
                   </div>
                   {submission.isScored ? (
                     <div className="flex items-center gap-2">
-                      <CheckCircle className="w-4 h-4 text-emerald-400" />
-                      <span className="text-sm font-medium text-emerald-400">{submission.score}/55</span>
+                      <CheckCircle className="w-4 h-4 text-[var(--color-success-500)]" />
+                      <span className="text-sm font-medium text-[var(--color-success-500)]">{submission.score}/55</span>
                     </div>
                   ) : (
                     <Badge variant="warning" dot>Pending</Badge>
                   )}
                 </div>
 
-                <p className="text-sm text-zinc-400 mb-4">{submission.tagline}</p>
+                <p className="text-sm text-[var(--color-gray-400)] mb-4">{submission.tagline}</p>
 
                 <div className="flex items-center justify-between">
                   <Badge
@@ -208,9 +208,9 @@ export function JudgingPage() {
                         href={submission.demoUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="p-2 hover:bg-zinc-800 rounded-lg transition-colors"
+                        className="p-2 hover:bg-[var(--color-offwhite-4)] rounded-lg transition-colors"
                       >
-                        <ExternalLink className="w-4 h-4 text-zinc-400" />
+                        <ExternalLink className="w-4 h-4 text-[var(--color-gray-400)]" />
                       </a>
                     )}
                     {submission.videoUrl && (
@@ -218,9 +218,9 @@ export function JudgingPage() {
                         href={submission.videoUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="p-2 hover:bg-zinc-800 rounded-lg transition-colors"
+                        className="p-2 hover:bg-[var(--color-offwhite-4)] rounded-lg transition-colors"
                       >
-                        <Video className="w-4 h-4 text-zinc-400" />
+                        <Video className="w-4 h-4 text-[var(--color-gray-400)]" />
                       </a>
                     )}
                     {submission.repoUrl && (
@@ -228,16 +228,16 @@ export function JudgingPage() {
                         href={submission.repoUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="p-2 hover:bg-zinc-800 rounded-lg transition-colors"
+                        className="p-2 hover:bg-[var(--color-offwhite-4)] rounded-lg transition-colors"
                       >
-                        <Github className="w-4 h-4 text-zinc-400" />
+                        <Github className="w-4 h-4 text-[var(--color-gray-400)]" />
                       </a>
                     )}
                   </div>
                 </div>
 
                 {!submission.isScored && (
-                  <div className="mt-4 pt-4 border-t border-zinc-800">
+                  <div className="mt-4 pt-4 border-t border-[var(--color-gray-100)]">
                     <Button fullWidth variant="secondary" size="sm">
                       Score This Project
                     </Button>
