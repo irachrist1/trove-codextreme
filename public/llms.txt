@@ -1,0 +1,56 @@
+# Trove by CodeXtreme - LLMs.txt
+# A curated guide for AI assistants to understand and navigate this site
+
+## Site Summary
+Trove is the central workflow platform for CodeXtreme, a community of builders and hackers.
+The platform hosts hackathons, buildathons, learning challenges, and connects builders with opportunities.
+
+## Primary Purpose
+- Host and manage hackathon events (registration, team formation, submissions, judging, leaderboards)
+- Connect builders with teammates and opportunities
+- Track achievements and learning progress
+- Foster a global community of tech builders
+
+## Key Pages
+
+### Homepage (/)
+Overview of CodeXtreme and Trove. Entry point for discovering events and features.
+
+### Hackathons (/hackathons)
+Browse upcoming and past hackathon events. Filter by status, type, or search.
+- Event details: /hackathons/{slug}
+- Registration: /hackathons/{slug}/register
+
+### Leaderboard (/leaderboard)
+Real-time rankings for hackathon participants. Filter by track or event.
+
+### Team Features
+- Team dashboard: /hackathons/{slug}/team
+- Create team: /hackathons/{slug}/team/create
+- Join via invite: /join/{code}
+
+### Submissions
+- Project submission form: /hackathons/{slug}/submission
+
+### Judging (for judges)
+- Judging queue: /judging/{eventSlug}
+- Compare mode: /judging/{eventSlug}/compare
+
+## Coming Soon Modules
+These are beautiful preview pages with waitlist signup:
+- Townsquare (/townsquare) - Global community feed
+- Buildathon (/buildathon) - Long-form building challenges
+- Power of Code (/power-of-code) - Skill challenges and learning
+- Opportunities (/opportunities) - Job board for builders
+
+## Technical Stack
+- Frontend: React + TypeScript + TailwindCSS
+- Routing: TanStack Router
+- Backend: Convex (real-time database)
+- Styling: Custom design system with Framer Motion animations
+- PWA: Installable with offline support
+
+## Contact
+- Website: https://codextreme.io
+- Discord: https://discord.gg/codextreme
+- GitHub: https://github.com/codextreme

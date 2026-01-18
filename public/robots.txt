@@ -1,0 +1,21 @@
+# Trove by CodeXtreme - robots.txt
+# https://trove.codextreme.io
+
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://trove.codextreme.io/sitemap.xml
+
+# Disallow admin/private areas
+Disallow: /admin/
+Disallow: /api/
+Disallow: /_convex/
+
+# Allow important pages
+Allow: /hackathons
+Allow: /leaderboard
+Allow: /townsquare
+Allow: /buildathon
+Allow: /power-of-code
+Allow: /opportunities

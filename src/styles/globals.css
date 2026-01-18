@@ -1,0 +1,262 @@
+@import "tailwindcss";
+
+/* Custom theme configuration for Tailwind v4 */
+@theme {
+  --color-black-900: #000000;
+  --color-black-800: #313130;
+  --color-black-700: #626260;
+  --color-gray-500: #4A4A4A;
+  --color-gray-400: #6C6C6B;
+  --color-gray-300: #8E8E8C;
+  --color-gray-200: #B0B0AE;
+  --color-gray-100: #D2D2CF;
+  --color-gray-50: #E3E3DF;
+
+  --color-white: #FFFFFF;
+  --color-offwhite-1: #FDFDFC;
+  --color-offwhite-2: #FBFBF9;
+  --color-offwhite-3: #F8F8F6;
+  --color-offwhite-4: #F6F6F3;
+  --color-offwhite-5: #F5F5F2;
+
+  --color-red-500: #D10000;
+  --color-red-400: #D83130;
+  --color-red-300: #DF6260;
+  --color-red-200: #E69290;
+  --color-red-100: #EDC3C0;
+  --color-red-50: #F1DCD8;
+
+  --color-success-500: #16A34A;
+  --color-success-400: #42B36B;
+  --color-success-300: #6FC38C;
+  --color-success-200: #9BD4AE;
+  --color-success-100: #C8E4CF;
+  --color-success-50: #DEECDF;
+
+  --color-warning-500: #FFB703;
+  --color-warning-400: #FDC332;
+  --color-warning-300: #FBCF62;
+  --color-warning-200: #F8DC91;
+  --color-warning-100: #F6E8C1;
+  --color-warning-50: #F5EED8;
+
+  --color-info-500: #1E3A8A;
+  --color-info-400: #495F9E;
+  --color-info-300: #7484B3;
+  --color-info-200: #9EAAC7;
+  --color-info-100: #C9CFDC;
+  --color-info-50: #DFE1E6;
+
+  --color-bg-primary: var(--color-offwhite-2);
+  --color-bg-secondary: var(--color-offwhite-4);
+  --color-bg-tertiary: var(--color-offwhite-5);
+  --color-bg-elevated: var(--color-white);
+  --color-bg-hover: var(--color-offwhite-3);
+
+  --color-border-subtle: var(--color-gray-50);
+  --color-border-default: var(--color-gray-100);
+  --color-border-strong: var(--color-gray-200);
+
+  --color-text-primary: var(--color-black-900);
+  --color-text-secondary: var(--color-black-800);
+  --color-text-tertiary: var(--color-gray-400);
+  --color-text-muted: var(--color-gray-300);
+
+  --color-accent-primary: var(--color-red-500);
+  --color-link: var(--color-info-500);
+
+  --font-family-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-family-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+/* Base layer styles */
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    font-family: var(--font-family-sans);
+    background-color: var(--color-bg-primary);
+    color: var(--color-text-primary);
+    line-height: 1.6;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background-color: var(--color-gray-100);
+    color: var(--color-text-primary);
+  }
+
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--color-bg-secondary);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-border-default);
+    border-radius: 9999px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-border-strong);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-black-900);
+    outline-offset: 2px;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  button {
+    font-family: inherit;
+    cursor: pointer;
+  }
+
+  input, textarea, select {
+    font-family: inherit;
+    font-size: inherit;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+/* Component layer styles */
+@layer components {
+  .gradient-text {
+    background: linear-gradient(135deg, var(--color-black-900) 0%, var(--color-black-700) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .gradient-border {
+    position: relative;
+    background: var(--color-bg-elevated);
+    border-radius: 16px;
+  }
+
+  .gradient-border::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    padding: 1px;
+    background: linear-gradient(135deg, var(--color-gray-100) 0%, var(--color-gray-50) 100%);
+    border-radius: inherit;
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    -webkit-mask-composite: xor;
+    pointer-events: none;
+  }
+
+  .text-display {
+    font-size: clamp(2rem, 5vw, 4rem);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+  }
+
+  .text-headline {
+    font-size: clamp(1.5rem, 3vw, 2.5rem);
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+  }
+
+  .text-title {
+    font-size: clamp(1.125rem, 2vw, 1.5rem);
+    font-weight: 600;
+    line-height: 1.3;
+  }
+
+  .text-body {
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.6;
+  }
+
+  .text-caption {
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--color-text-secondary);
+  }
+
+  .text-overline {
+    font-size: 0.75rem;
+    font-weight: 600;
+    line-height: 1.4;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-text-tertiary);
+  }
+}
+
+/* Utility layer styles */
+@layer utilities {
+  .shimmer {
+    background: linear-gradient(
+      90deg,
+      var(--color-bg-tertiary) 25%,
+      var(--color-bg-elevated) 50%,
+      var(--color-bg-tertiary) 75%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.5s ease-in-out infinite;
+  }
+
+  .pulse-glow {
+    animation: pulse-glow 2s ease-in-out infinite;
+  }
+
+  .float {
+    animation: float 3s ease-in-out infinite;
+  }
+}
+
+/* Animations */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.08);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.12);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}

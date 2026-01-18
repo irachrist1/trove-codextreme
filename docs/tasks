@@ -1,0 +1,305 @@
+Trove (CodeXtreme) Functional Product Plan
+
+Document type: PRD + SRS + Implementation Plan
+Owner: Product/Engineering
+Status: Draft for implementation
+Last updated: 2025-01-XX
+
+0) Purpose
+This document is the single handoff spec for building the fully functional Trove app. It describes scope, behavior, data model expectations, UI system constraints, and a staged implementation plan. It is written to be actionable for another agent to implement end-to-end without reliance on mocks.
+
+1) Context and Current State
+- The UI flows exist, but many are backed by mocks and setTimeout. Core pages: `src/pages/hackathons/*`, `src/pages/teams/*`, `src/pages/judging/*`, `src/pages/Leaderboard.tsx`, routing in `src/routeTree.gen.tsx`.
+- Convex is configured and contains schema + functions for events, registrations, teams, submissions, judging, leaderboard, users, waitlist (`convex/schema.ts`, `convex/*.ts`).
+- Auth is currently fake (hardcoded user). There is no true session/identity yet.
+- Styling uses a dark/indigo/purple palette that conflicts with the required brand tokens.
+- Figma reference is provided but not accessible from this environment. Use `src/assets/Reference` images as local source of truth until Figma is accessible.
+
+2) Product Goals
+- Make the current "works" flow real with Convex persistence and real auth:
+  Home -> Explore Events -> Hackathons -> Event Detail -> Register Now -> 3-step Registration -> Team page -> Submission -> Save Draft -> Leaderboard -> Judging compare.
+- After refresh, data must persist.
+- Protected routes must require auth and enforce roles (admin/judge/participant).
+- Admin modules must exist for event management, registrations, judging, and users.
+- No mock constants or setTimeout-based fake APIs in any core flow.
+
+3) Non-Goals / Guardrails
+- Do NOT create new marketing/landing pages.
+- Do NOT introduce new color schemes. Follow locked brand tokens.
+- Do NOT leave mock data in core flows.
+- Prefer small PR-sized diffs per stage.
+
+4) Design Source of Truth
+- Primary: Figma (when accessible)
+- Secondary: `src/assets/Reference`
+- Tertiary: existing components
+
+5) Brand Color System (Locked)
+- Core neutrals:
+  - black-900 #000000
+  - black-800 #313130
+  - black-700 #626260
+  - gray-500  #4A4A4A
+  - gray-400  #6C6C6B
+  - gray-300  #8E8E8C
+  - gray-200  #B0B0AE
+  - gray-100  #D2D2CF
+  - gray-50   #E3E3DF
+- Whites:
+  - white #FFFFFF
+  - offwhite-1 #FDFDFC
+  - offwhite-2 #FBFBF9
+  - offwhite-3 #F8F8F6
+  - offwhite-4 #F6F6F3
+  - offwhite-5 #F5F5F2
+- Primary brand red (use sparingly):
+  - red-500 #D10000 (primary accent)
+  - red-400 #D83130
+  - red-300 #DF6260
+  - red-200 #E69290
+  - red-100 #EDC3C0
+  - red-50  #F1DCD8
+- Status colors (only for statuses/alerts):
+  - success #16A34A (tints #42B36B #6FC38C #9BD4AE #C8E4CF #DEECDF)
+  - warning #FFB703 (tints #FDC332 #FBCF62 #F8DC91 #F6E8C1 #F5EED8)
+  - info    #1E3A8A (tints #495F9E #7484B3 #9EAAC7 #C9CFDC #DFE1E6)
+- Usage rules:
+  - Backgrounds: white/offwhites only.
+  - Text: black-900 primary, black-800 secondary, gray-400 tertiary.
+  - Borders: gray-100/gray-50.
+  - Primary button: black-900 fill + white text.
+  - ONE hero CTA per view may be red-500 fill + white text.
+  - Links: #1E3A8A only for inline links.
+  - Destructive: red-500.
+  - Success/warn/info badges: use signal green/amber/blue with very light tints for backgrounds.
+
+6) Users, Roles, Permissions
+Roles are stored in `users.roles` and can include: admin, judge, hacker (participant), mentor, partner, organizer.
+Access control:
+- Admin: full access to `/admin/*` and any event management actions.
+- Judge: access to `/judging/*` for assigned events only.
+- Participant: access to registration, team, submission routes for events they are registered for.
+- Organizer: can be treated as admin for event operations (define mapping in RBAC rules).
+
+7) Auth Model (Convex-backed)
+Requirement: Real authentication, persistent across refresh, with protected routes.
+
+Recommended implementation (MVP without external IdP):
+- Add new Convex tables (schema additions):
+  - authSessions: { userId, sessionToken, createdAt, expiresAt, userAgent?, ip? }
+    - Index by sessionToken
+  - authOtps (or authCodes): { email, code, purpose, expiresAt, createdAt }
+    - Index by email+purpose
+  - passwordResets: { email, token, expiresAt, createdAt }
+    - Index by token
+- Add Convex functions:
+  - auth.register({ email, password, firstName, lastName }): create user + hashed password + session
+  - auth.login({ email, password }): verify password + session
+  - auth.logout({ sessionToken }): invalidate
+  - auth.getCurrentUser({ sessionToken }): resolve user
+  - auth.requestMagicLink({ email }): create code/token (email sending can be out-of-scope; expose for dev)
+  - auth.verifyCode({ email, code }): create session
+  - auth.requestPasswordReset({ email }): create reset token
+  - auth.resetPassword({ token, newPassword }): update passwordHash
+- Frontend:
+  - Store sessionToken in secure storage (localStorage for MVP; cookie if using custom HTTP endpoints).
+  - Auth context provides currentUser, login, logout, register, refreshSession.
+  - Protected routes require session; redirect to `/auth/login` when absent.
+- Security note: For full security, prefer Convex Auth/identity or secure cookies. MVP may accept sessionToken in args and validate in Convex with a `requireAuth` helper.
+
+8) Information Architecture / Routes
+Public:
+- `/` home (existing)
+- `/hackathons` list
+- `/hackathons/:slug` detail
+- `/auth/login`
+- `/auth/register`
+- `/auth/forgot`
+- `/auth/reset`
+- `/auth/magic-link`
+- `/auth/verify-code`
+- Stubs: `/townsquare`, `/buildathon`, `/power-of-code`, `/opportunities` (waitlist only)
+
+Protected (participant):
+- `/hackathons/:slug/register`
+- `/hackathons/:slug/team`
+- `/hackathons/:slug/team/create`
+- `/join/:inviteCode`
+- `/hackathons/:slug/submission`
+
+Protected (judge):
+- `/judging/:eventSlug`
+- `/judging/:eventSlug/compare`
+
+Protected (admin):
+- `/admin/events`
+- `/admin/events/:id/registrations`
+- `/admin/events/:id/rubric`
+- `/admin/events/:id/judging`
+- `/admin/users`
+
+9) Data Model Expectations (Convex)
+Existing tables in `convex/schema.ts` are the primary model: users, events, eventSponsors, eventStaff, registrations, teams, teamMembers, teamInvites, submissions, judgingRubrics, judgingScores, judgingAssignments, leaderboard, waitlist, analyticsEvents.
+
+Required additions for auth (see section 7).
+
+Key derived expectations:
+- Event detail uses `events` plus related sponsors/staff.
+- Registration is per user per event and includes form responses.
+- Team membership is derived via `teamMembers`.
+- Submission is per team; one per team.
+- Judging assignments are per judge per event; scores are per judge per submission.
+- Leaderboard is either published (materialized) or computed live.
+
+10) Functional Requirements by Feature
+
+10.1 Event Discovery
+- List page loads from Convex: `events.listPublished`.
+- Search uses `events.search` or client-side filter on list (if query includes search term).
+- Empty state when no events.
+- No mock data fallback.
+
+10.2 Event Detail
+- Load by slug from Convex: `events.getBySlug`.
+- If not found, show not-found/empty state.
+- CTA: "Register Now" only when `status == registration_open`.
+
+10.3 Registration (3-step)
+- Load event by slug, resolve eventId.
+- Check if user already registered (`registrations.checkRegistration`).
+- Submit registration (`registrations.register`) with form data.
+- After completion, toast + navigate back to event detail and show registered state.
+
+10.4 Team Management
+- Team dashboard loads current user team for event (`teams.getUserTeam`).
+- If no team, show create/join options.
+- Create team via `teams.create` and update UI; store invite code.
+- Join team via invite code (`teams.getByInviteCode` + `teams.joinByInviteCode`).
+- Update team settings (`teams.update`), regenerate invite code (`teams.regenerateInviteCode`), leave team (`teams.leave`).
+
+10.5 Submission
+- Load team and current submission via `teams.getUserTeam` and `submissions.getByTeam`.
+- If none, create draft via `submissions.create` on first save.
+- Save draft via `submissions.update`.
+- Submit via `submissions.submit` (validate required fields).
+- Unsubmit (optional) via `submissions.unsubmit`.
+
+10.6 Leaderboard
+- `/leaderboard` uses `leaderboard.getGlobalTop` or `leaderboard.getByEvent` depending on design.
+- If leaderboard not published or empty, show empty state.
+- No mock leaderboard arrays.
+
+10.7 Judging
+- Queue: `judging.getAssignments` for judge + event.
+- Compare mode: use assignments list and rubric (`judging.getRubric`).
+- Submit score with `judging.submitScore`.
+- Display progress based on assignment completed/total.
+
+10.8 Admin Modules
+A) /admin/events
+- UI: left rail, top bar, filter row (Search, Type, Audience, Location, Access), active events grid, past events section.
+- Actions: create, edit, publish/unpublish, archive, manage registrations, manage rubric/judging, view submissions.
+- Convex: `events.create`, `events.update`, `events.updateStatus`, `events.listPublished`, `events.listUpcoming`, `events.search`, `events.getById`, `events.getBySlug`. Add admin list query if required.
+
+B) /admin/events/:id/registrations
+- List registrations with filters, approve/cancel/check-in, optional CSV export.
+- Convex: `registrations.listByEvent`, `registrations.updateStatus`, `registrations.checkIn`, `registrations.cancel`.
+
+C) /admin/events/:id/rubric
+- Build/edit rubric criteria (name, description, maxScore, weight).
+- Convex: `judging.createRubric`, `judging.getRubric`, add `judging.updateRubric`.
+
+D) /admin/events/:id/judging
+- Assign submissions to judges; monitor completion.
+- Convex: `judging.assignSubmissions`, add `judging.listAssignments`.
+
+E) /admin/users
+- Search users, set roles (admin/judge/participant/etc).
+- Convex: `users.search`, `users.listByRole`, `users.updateRoles`.
+
+11) Analytics
+Keep PostHog. Track only key actions:
+- auth_login_success
+- event_register_complete
+- team_created
+- submission_saved
+- submission_submitted
+- admin_event_published
+- judge_score_submitted
+
+12) Empty/Loading/Error States
+- All pages must render meaningful loading states when queries are pending.
+- All pages must render empty states when no data.
+- Error states must be surfaced via toast and inline message where appropriate.
+
+13) Data Seeding
+- If DB is empty, show clear instruction or admin action to run `seedDatabase` in `convex/seed.ts`.
+- No hardcoded mocks in production flows.
+
+14) Work Strategy (Must Follow)
+At the start of each stage:
+- List exact pages/routes affected.
+- List exact Convex functions used.
+- List acceptance checks.
+Implement stage, then report done + next.
+
+15) Implementation Plan (Kanban)
+
+Inbox
+- Stage 0: Foundation and Tokens
+  - Pages/areas: `src/styles/globals.css`, `src/components/ui/Button.tsx`, `src/components/ui/Badge.tsx`, `src/components/ui/Card.tsx`, `src/components/ui/Input.tsx`, `src/components/ui/Toast.tsx`, `src/components/layout/AppShell.tsx`, and any flow pages using indigo/purple.
+  - Convex: none.
+  - Acceptance checks: tokenized colors, neutral backgrounds, red only for single CTA/destructive, status colors only for status.
+
+- Stage 1: Auth (Convex)
+  - Pages/routes: `/auth/login`, `/auth/register`, `/auth/forgot`, `/auth/reset`, `/auth/magic-link`, `/auth/verify-code`.
+  - Convex: `auth.*` (see section 7) + update existing queries/mutations to derive user via session instead of passed userId.
+  - Acceptance checks: login persists, logout works, protected routes enforced, AppShell shows real user.
+
+- Stage 2: Event Discovery
+  - Pages/routes: `/hackathons`, `/hackathons/:slug`.
+  - Convex: `events.listPublished`, `events.search`, `events.getBySlug`.
+  - Acceptance checks: no mocks, empty state if DB empty.
+
+- Stage 3: Registration
+  - Pages/routes: `/hackathons/:slug/register`.
+  - Convex: `registrations.checkRegistration`, `registrations.register`.
+  - Acceptance checks: registration persists, revisit shows state.
+
+- Stage 4: Team Management
+  - Pages/routes: `/hackathons/:slug/team`, `/hackathons/:slug/team/create`, `/join/:inviteCode`.
+  - Convex: `teams.create`, `teams.joinByInviteCode`, `teams.getUserTeam`, `teams.update`, `teams.leave`, `teams.regenerateInviteCode`, `teams.getByInviteCode`.
+  - Acceptance checks: membership persists, invite code works.
+
+- Stage 5: Submission
+  - Pages/routes: `/hackathons/:slug/submission`.
+  - Convex: `submissions.getByTeam`, `submissions.create`, `submissions.update`, `submissions.submit`, `submissions.unsubmit`.
+  - Acceptance checks: save draft + submit persist.
+
+- Stage 6: Leaderboard
+  - Pages/routes: `/leaderboard`.
+  - Convex: `leaderboard.getGlobalTop` or `leaderboard.getByEvent`.
+  - Acceptance checks: no mocks, empty state when none published.
+
+- Stage 7: Judging
+  - Pages/routes: `/judging/:eventSlug`, `/judging/:eventSlug/compare`.
+  - Convex: `judging.getAssignments`, `judging.getRubric`, `judging.submitScore`, `judging.getSubmissionScores`.
+  - Acceptance checks: scoring persists, progress updates.
+
+- Stage 8: Admin
+  - Pages/routes: `/admin/events`, `/admin/events/:id/registrations`, `/admin/events/:id/rubric`, `/admin/events/:id/judging`, `/admin/users`.
+  - Convex: events/registrations/judging/users functions described in section 10.8.
+  - Acceptance checks: admin-only, all CRUD paths functional.
+
+Progress
+- None yet.
+
+Done
+- Existing UI scaffolding and Convex domain functions are present.
+
+16) Testing and Validation
+- Run: `npm run dev` and walk the quick test flow end-to-end.
+- Verify persistence by refreshing each page.
+- Validate role gating by logging in as admin/judge/participant and accessing protected routes.
+- Confirm PostHog events fire for required actions.
+
